@@ -1,0 +1,28 @@
+import java.util.*;
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int cnt=0;
+        int[] pSum=new int[nums.length];
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            pSum[i]=sum;
+        }
+        HashMap<Integer,Integer> map=new HashMap<>();
+        map.put(0,1);
+        for(int i:pSum){
+            int smk=i-k;
+            if(map.containsKey(smk)){
+                cnt=cnt+map.get(smk);
+                //map.put(i,map.get(i)+1);
+            }
+            if(map.containsKey(i)){
+                map.put(i,map.get(i)+1);
+            }
+            else{
+                map.put(i,1);
+            }
+        }
+        return cnt;
+    }
+}
