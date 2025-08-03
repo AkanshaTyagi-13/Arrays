@@ -1,0 +1,22 @@
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        // code here
+        int maxi=Integer.MIN_VALUE;
+        ArrayList<Integer> ans=new ArrayList<>();
+        int i=arr.length-1;
+        while(i>=0){
+            maxi=Math.max(maxi,arr[i]);
+            if(maxi==arr[i]) ans.add(arr[i]);
+            i--;
+        }
+        int j=0,k=ans.size()-1;
+        while(j<=k){
+            int temp=ans.get(j);
+            ans.set(j,ans.get(k));
+            ans.set(k,temp);
+            j++;
+            k--;
+        }
+        return ans;
+    }
+}
