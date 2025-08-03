@@ -1,0 +1,43 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        //break point
+        int n=nums.length, idx=-1;
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                idx=i;
+                break;
+            }
+        }
+
+        if(idx==-1){
+            int i=0,j=n-1;
+            while(i<=j){
+                int temp=nums[i];
+                nums[i]=nums[j];
+                nums[j]=temp;
+                i++;
+                j--;
+            }
+            return;
+        }
+        //finding greater than idx but smallest than other elements
+        for(int i=n-1;i>idx;i--){
+            if(nums[i]>nums[idx]){
+                int temp=nums[i];
+                nums[i]=nums[idx];
+                nums[idx]=temp;
+                break;
+            }
+        }
+
+        //reverse the array elements after idx
+        int i=idx+1,j=n-1;
+        while(i<=j){
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
+        }
+    }
+}
