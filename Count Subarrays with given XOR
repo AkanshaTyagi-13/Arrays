@@ -1,0 +1,19 @@
+class Solution {
+    public long subarrayXor(int arr[], int k) {
+        // code here
+        long cnt=0;
+        int xr=0;
+        HashMap<Integer,Integer> map=new HashMap<>();
+        map.put(0,1);
+        for(int i=0;i<arr.length;i++){
+            xr=xr^arr[i];
+            int x=xr^k;
+            if(map.containsKey(x)){
+                cnt=cnt+map.get(x);
+            }
+            if(map.containsKey(xr)) map.put(xr,map.get(xr)+1);
+            else map.put(xr,1);
+        }
+        return cnt;
+    }
+}
