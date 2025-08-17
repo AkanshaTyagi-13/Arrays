@@ -1,0 +1,20 @@
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+       int n=grid.length*grid[0].length;
+       long sum=((long)n*(n+1))/2;
+       long sq=((long)n*(n+1)*(2L*n+1))/6;
+       long s=0,sq2=0;
+       for(int[] a:grid){
+        for(int num:a){
+            s+=num;
+            sq2=sq2+(long) num*num;
+        }
+       }
+       long repeating=-1,missing=-1;
+       long totalSum=s-sum;
+       long totalSquare=sq2-sq;
+       repeating=(totalSum+(totalSquare/totalSum))/2;
+       missing=repeating-totalSum;
+       return new int[]{(int)repeating,(int)missing};
+    }
+}
