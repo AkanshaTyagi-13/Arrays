@@ -1,0 +1,47 @@
+class Solution {
+    public void mergeSort(int[] arr, int l, int m ,int r){
+        int n1=m-l+1;
+        int n2=r-m;
+        int[] left=new int[n1];
+        int[] right=new int[n2];
+
+        for(int i=0;i<n1;i++){
+            left[i]=arr[i+l];
+        }
+        for(int i=0;i<n2;i++){
+            right[i]=arr[m+1+i];
+        }
+        int i=0, j=0, k=l;
+        while(i<n1&&j<n2){
+            if(left[i]<=right[j]) arr[k++]=left[i++];
+            else{
+                arr[k++]=right[j++];
+            }
+        }
+        while(i<n1) arr[k++]=left[i++];
+        while(j<n2) arr[k++]=right[j++];
+    }
+
+    public int countReversePairs(int[] arr,int l, int m, int h){
+        int right=m+1;
+        int cnt=0;
+        for(int i=l;i<=m;i++){
+            while(right<=h&&(long)arr[i]>2L*arr[right]) right++;
+            cnt+=(right-(m+1));
+        }
+        return cnt;
+    }
+    public int sort(int[] arr, int l,int h){
+        int cnt=0;
+        if(l>=h) return cnt;
+        int mid=(l+h)/2;
+        cnt+=sort(arr,l,mid);
+        cnt+=sort(arr,mid+1,h);
+        cnt+=countReversePairs(arr,l,mid,h);
+        mergeSort(arr,l,mid,h);
+        return cnt;
+    }
+    public int reversePairs(int[] nums) {
+        return sort(nums,0,nums.length-1); 
+    }
+}
